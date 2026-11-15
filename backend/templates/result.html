@@ -1,58 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Diabetes Prediction Result</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .result {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .result p {
-            margin: 10px 0;
-        }
-        .model-result {
-            margin: 15px 0;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #d9534f;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h2>Diabetes Prediction Result</h2>
-        </div>
-        <div class="result">
-            <p>You have the following chances of having diabetes based on our models:</p>
-            <div class="model-result">
-                <p>KNN: <span class="highlight">{{ pred.split('KNN: ')[1].split(' ')[0] }}</span></p>
-                <p>XGBoost: <span class="highlight">{{ pred.split('XGBoost: ')[1].split(' ')[0] }}</span></p>
-                <p>Logistic Regression: <span class="highlight">{{ pred.split('Logistic Regression: ')[1].split(' ')[0] }}</span></p>
-                <p>Random Forest: <span class="highlight">{{ pred.split('Random Forest: ')[1].split(' ')[0] }}</span></p>
-            </div>
-            <p>The best model predicts a <span class="highlight">{{ pred.split('The best model predicts a ')[1].split(' ')[0] }}</span> probability of having diabetes.</p>
-            <p><small>This is only an example, please consult a certified doctor for any medical advice.</small></p>
-        </div>
-    </div>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DiaBeat — educational model output</title>
+<style>
+body{margin:0;padding:32px 16px;background:#101726;color:#e9eff8;font:16px/1.6 system-ui,Arial,sans-serif}
+main{max-width:740px;margin:48px auto;background:#1c283a;border:1px solid #39475e;border-radius:20px;padding:30px}
+h1{font-size:32px;line-height:1.2}dl{display:grid;grid-template-columns:1fr auto;gap:14px;margin:26px 0}
+dt,dd{padding:10px 0;border-bottom:1px solid #39475e;margin:0}dd{font-weight:750;color:#8de0c6}
+p{color:#bac9da}strong{color:#ffe0a3}a{color:#9ac8ff}
+.error{color:#ffb7bf;padding:12px;border:1px solid #ae5462;border-radius:10px}
+</style></head><body><main>
+<h1>DiaBeat research demo</h1>
+{% if error %}
+<p class="error" role="alert">{{ error }}</p>
+{% elif results %}
+<p>Illustrative classification outputs from four historical models:</p>
+<dl>{% for item in results %}<dt>{{ item.name }}</dt><dd>{{ item.value }}</dd>{% endfor %}</dl>
+{% endif %}
+<p><strong>Not a diagnosis or calibrated clinical risk estimate.</strong>
+Higher percentages do not make a model more accurate. Model quality must be
+measured on held-out data; this demo is not validated for medical decisions.</p>
+<p><a href="/">Return to the example form</a></p>
+</main></body></html>
